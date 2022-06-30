@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "4a2d4b4e-8aa3-46f5-ace7-5a8be947360f",
+		"name": "fiap-microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User Service",
+			"item": [
+				{
+					"name": "Cadastro",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "api_token",
+								"value": "{{api-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"test2\",\n    \"email\": \"test2@test.com\",\n    \"password\": \"123456\",\n    \"cellphone\": \"11964623772\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}user/sign-up",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"postman.setEnvironmentVariable(\"user-token\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "api_token",
+								"value": "{{api-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": \"test2\",\n    \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}user/sing-in",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"sing-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mudar Senha",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{user-token}}",
+								"type": "text"
+							},
+							{
+								"key": "api_token",
+								"value": "{{api-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"123456\",\n    \"cellphone\": \"11964623772\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}user/change-password",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{user-token}}",
+								"type": "text"
+							},
+							{
+								"key": "api_token",
+								"value": "{{api-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}user/validate",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"validate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bank Service",
+			"item": [
+				{
+					"name": "Cadastro",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "api_token",
+								"value": "{{api-token}}",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "{{user-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bank_name\": \"Nu Bank\",\n    \"account_type\": \"credit\",\n    \"card_limit\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{url-bank}}bank/insert",
+							"host": [
+								"{{url-bank}}bank"
+							],
+							"path": [
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{user-token}}",
+								"type": "text"
+							},
+							{
+								"key": "api_token",
+								"value": "{{api-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bank_name\": \"Nu Bank 2\",\n    \"account_type\": \"credit\",\n    \"card_limit\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "{{url-bank}}bank/update/62be1e85e6ac7de8f151ddb8",
+							"host": [
+								"{{url-bank}}bank"
+							],
+							"path": [
+								"update",
+								"62be1e85e6ac7de8f151ddb8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dado",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{user-token}}",
+								"type": "text"
+							},
+							{
+								"key": "api_token",
+								"value": "{{api-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url-bank}}bank/62be1e85e6ac7de8f151ddb8",
+							"host": [
+								"{{url-bank}}bank"
+							],
+							"path": [
+								"62be1e85e6ac7de8f151ddb8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dados",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{user-token}}",
+								"type": "text"
+							},
+							{
+								"key": "api_token",
+								"value": "{{api-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url-bank}}bank",
+							"host": [
+								"{{url-bank}}bank"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "token",
+								"value": "{{user-token}}",
+								"type": "text"
+							},
+							{
+								"key": "api_token",
+								"value": "{{api-token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url-bank}}bank/delete/62be1e85e6ac7de8f151ddb8",
+							"host": [
+								"{{url-bank}}bank"
+							],
+							"path": [
+								"delete",
+								"62be1e85e6ac7de8f151ddb8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
