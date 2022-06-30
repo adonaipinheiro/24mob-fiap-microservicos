@@ -264,12 +264,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{url-bank}}bank/62be1e85e6ac7de8f151ddb8",
+							"raw": "{{url-bank}}bank/62be1fdfe6ac7de8f151ddc0",
 							"host": [
 								"{{url-bank}}bank"
 							],
 							"path": [
-								"62be1e85e6ac7de8f151ddb8"
+								"62be1fdfe6ac7de8f151ddc0"
 							]
 						}
 					},
